@@ -13,6 +13,20 @@ jobs:
   build-and-test:
     name: Build & Test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: diti4_pring_mvc
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: Nabou988
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres -d diti4_pring_mvc"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
     steps:
       - name: Checkout du code
         uses: actions/checkout@v4
@@ -25,6 +39,11 @@ jobs:
           cache: maven
 
       - name: Build + tests Maven
+        env:
+          DB_HOST: localhost
+          DB_NAME: diti4_pring_mvc
+          DB_USER: postgres
+          DB_PASSWORD: Nabou988
         run: mvn -B clean verify
 
       - name: Uploader le .jar (artifact)
@@ -37,6 +56,7 @@ jobs:
     name: Build & push image Docker Hub
     needs: build-and-test
     runs-on: ubuntu-latest
+    # On ne pousse l'image que sur main, pas sur les PR
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout du code
