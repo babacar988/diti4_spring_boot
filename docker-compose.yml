@@ -4,7 +4,7 @@ services:
     container_name: diti4-db
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${DB_NAME:-diti4}
+      POSTGRES_DB: ${DB_NAME:-diti4_pring_mvc}
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-Nabou988}
     ports:
@@ -12,7 +12,7 @@ services:
     volumes:
       - diti4-db-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-diti4}"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-diti4_pring_mvc}"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -26,7 +26,7 @@ services:
         condition: service_healthy
     environment:
       DB_HOST: db
-      DB_NAME: ${DB_NAME:-diti4}
+      DB_NAME: ${DB_NAME:-diti4_pring_mvc}
       DB_USER: ${DB_USER:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-Nabou988}
     ports:

@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS testMigrationBDD (
+    id BIGSERIAL PRIMARY KEY,
+    libelle VARCHAR(100) NOT NULL
+)

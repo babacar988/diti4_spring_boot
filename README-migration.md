@@ -27,8 +27,8 @@ Toute nouvelle évolution de schéma va dans un nouveau fichier
 ## 3. Swagger / OpenAPI
 Rien à coder : `springdoc-openapi-starter-webmvc-ui` scanne automatiquement
 tes `@RestController`. Une fois l'app lancée :
-- UI interactive : `http://localhost:8080/swagger-ui.html`
-- JSON brut : `http://localhost:8080/v3/api-docs`
+- UI interactive : `http://localhost:8081/swagger-ui.html`
+- JSON brut : `http://localhost:8081/v3/api-docs`
 
 Pour enrichir la doc, tu peux ajouter `@Operation(summary = "...")` sur les
 méthodes et `@Schema(description = "...")` sur les champs des DTO — optionnel,
